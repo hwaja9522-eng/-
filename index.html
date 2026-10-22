@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="만안종합사회복지관 - 존중으로 소통하며 이웃과 함께 더불어 사는 마을을 만들어 갑니다.">
+  <title>만안종합사회복지관 | 이웃과 함께 만드는 마을</title>
+  <style>
+    :root {
+      --navy: #183b35;
+      --green: #2f6b55;
+      --mint: #e8f1e9;
+      --cream: #f8f6ef;
+      --gold: #d9a94d;
+      --ink: #23332f;
+      --muted: #687670;
+      --white: #ffffff;
+      --line: #e1e8e2;
+      --shadow: 0 18px 50px rgba(24, 59, 53, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+      background: var(--white);
+      word-break: keep-all;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+    .topline { height: 5px; background: linear-gradient(90deg, var(--green) 0 70%, var(--gold) 70%); }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.93); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(225,232,226,.85);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 82px; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; color: var(--navy); letter-spacing: -.04em; }
+    .brand-mark { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 15px 15px 15px 4px; background: var(--green); color: white; font-size: 20px; }
+    .brand small { display: block; font-size: 10px; letter-spacing: .15em; color: var(--muted); font-weight: 700; line-height: 1.3; }
+    .navlinks { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weight: 700; color: #52635c; }
+    .navlinks a:hover { color: var(--green); }
+    .nav-cta { background: var(--navy); color: white !important; padding: 11px 18px; border-radius: 999px; }
+    .menu-btn { display: none; border: 0; background: transparent; color: var(--navy); font-size: 25px; cursor: pointer; }
+    .hero { background: var(--cream); overflow: hidden; position: relative; }
+    .hero-inner { min-height: 610px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 40px; padding-top: 50px; padding-bottom: 65px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green); font-weight: 800; letter-spacing: .13em; font-size: 12px; text-transform: uppercase; }
+    .eyebrow:before { content: ""; width: 28px; height: 2px; background: var(--gold); }
+    h1 { margin: 20px 0 22px; font-size: clamp(38px, 5.2vw, 66px); line-height: 1.18; letter-spacing: -.065em; color: var(--navy); }
+    h1 em { color: var(--green); font-style: normal; position: relative; white-space: nowrap; }
+    h1 em:after { content: ""; position: absolute; left: 0; bottom: 1px; width: 100%; height: 9px; background: #e7c982; opacity: .55; z-index: -1; }
+    .hero-copy { max-width: 560px; color: #586961; font-size: 17px; margin: 0 0 30px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 10px; padding: 14px 21px; border-radius: 999px; font-weight: 800; font-size: 14px; transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(24,59,53,.12); }
+    .btn-primary { color: white; background: var(--green); }
+    .btn-secondary { color: var(--navy); border: 1px solid #cbd8ce; background: rgba(255,255,255,.7); }
+    .hero-art { position: relative; min-height: 430px; display: grid; place-items: center; }
+    .art-circle { position: absolute; width: min(420px, 95%); aspect-ratio: 1; border-radius: 50%; background: #e1ebdf; }
+    .art-circle:before, .art-circle:after { content: ""; position: absolute; border: 1px solid rgba(47,107,85,.18); border-radius: 50%; inset: 22px; }
+    .art-circle:after { inset: 48px; }
+    .sun { position: absolute; width: 90px; height: 90px; background: #e9c875; border-radius: 50%; top: 20px; right: 35px; }
+    .hill { position: absolute; bottom: 16px; width: 95%; height: 190px; background: #8eb59a; border-radius: 52% 48% 0 0 / 55% 55% 0 0; transform: rotate(-7deg); }
+    .hill.two { bottom: 0; width: 85%; height: 150px; background: #477d65; transform: rotate(8deg); right: -5px; }
+    .house { position: relative; z-index: 2; margin-top: -25px; width: 180px; height: 150px; background: #fffaf0; border-radius: 10px 10px 3px 3px; box-shadow: 0 16px 25px #2d594422; }
+    .roof { position: absolute; width: 0; height: 0; border-left: 112px solid transparent; border-right: 112px solid transparent; border-bottom: 83px solid #d58c5c; left: -22px; top: -70px; }
+    .door { position: absolute; bottom: 0; left: 72px; width: 38px; height: 70px; border-radius: 18px 18px 0 0; background: #376b54; }
+    .window { position: absolute; top: 28px; width: 29px; height: 29px; background: #e5c66d; border: 4px solid #fff; border-radius: 4px; }
+    .window.left { left: 22px; } .window.right { right: 22px; }
+    .floating-note { position: absolute; z-index: 4; padding: 14px 17px; background: white; border-radius: 15px; box-shadow: var(--shadow); font-size: 13px; font-weight: 800; color: var(--navy); }
+    .floating-note span { display: block; font-size: 10px; letter-spacing: .12em; color: var(--green); margin-bottom: 3px; }
+    .note-one { left: -2px; top: 75px; transform: rotate(-4deg); }
+    .note-two { right: -5px; bottom: 55px; transform: rotate(4deg); }
+    .stats { background: var(--navy); color: white; }
+    .stats-inner { display: grid; grid-template-columns: repeat(3,1fr); padding: 25px 0; }
+    .stat { padding: 4px 30px; border-right: 1px solid rgba(255,255,255,.2); }
+    .stat:first-child { padding-left: 0; } .stat:last-child { border: 0; }
+    .stat strong { display: block; color: #f0d38b; font-size: 24px; letter-spacing: -.04em; }
+    .stat span { font-size: 13px; color: #d4e1d9; }
+    section { padding: 100px 0; }
+    .section-head { max-width: 680px; margin-bottom: 44px; }
+    .section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
+    .section-head.center .eyebrow { justify-content: center; }
+    h2 { margin: 12px 0 15px; color: var(--navy); font-size: clamp(30px, 4vw, 44px); line-height: 1.25; letter-spacing: -.055em; }
+    .section-desc { color: var(--muted); font-size: 16px; margin: 0; }
+    .mission-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; }
+    .mission-card { padding: 38px; border-radius: 24px; background: var(--cream); min-height: 280px; position: relative; overflow: hidden; }
+    .mission-card.dark { background: var(--green); color: white; }
+    .card-label { font-size: 12px; font-weight: 900; letter-spacing: .18em; color: var(--green); }
+    .dark .card-label { color: #f2d58f; }
+    .mission-card h3 { font-size: 26px; line-height: 1.5; letter-spacing: -.04em; margin: 23px 0 0; }
+    .mission-card.dark h3 { color: white; }
+    .mission-card p { margin: 15px 0 0; color: #dce9df; font-size: 14px; }
+    .mission-watermark { position: absolute; right: 24px; bottom: -25px; font-size: 105px; opacity: .09; }
+    .values { background: #f7f9f5; }
+    .value-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .value-card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 27px 24px; transition: transform .2s, box-shadow .2s; }
+    .value-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .value-icon { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; background: var(--mint); font-size: 24px; margin-bottom: 23px; }
+    .value-card h3 { margin: 0 0 8px; font-size: 20px; color: var(--navy); }
+    .value-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .strategy-intro { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 38px; }
+    .strategy-intro .section-head { margin-bottom: 0; }
+    .pill { border: 1px solid #d5e0d7; border-radius: 999px; padding: 9px 15px; color: var(--green); font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .strategy-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .strategy-card { border: 1px solid var(--line); border-radius: 24px; padding: 32px; }
+    .strategy-card.featured { background: var(--cream); border-color: transparent; }
+    .strategy-number { color: var(--gold); font-size: 13px; font-weight: 900; letter-spacing: .12em; }
+    .strategy-card h3 { font-size: 25px; line-height: 1.45; color: var(--navy); margin: 12px 0 16px; letter-spacing: -.045em; }
+    .strategy-card p { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+    .strategy-card ul { list-style: none; padding: 0; margin: 0; }
+    .strategy-card li { position: relative; padding: 10px 0 10px 22px; border-top: 1px solid #e5eae4; font-size: 14px; color: #485951; }
+    .strategy-card li:before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 900; }
+    .vision-band { background: var(--navy); color: white; padding: 76px 0; position: relative; overflow: hidden; }
+    .vision-band:after { content: "2031"; position: absolute; right: -15px; bottom: -90px; font-size: 260px; font-weight: 900; color: white; opacity: .035; letter-spacing: -.08em; }
+    .vision-inner { display: flex; align-items: center; justify-content: space-between; gap: 35px; position: relative; z-index: 1; }
+    .vision-inner h2 { color: white; max-width: 650px; margin-bottom: 12px; }
+    .vision-inner p { margin: 0; color: #d0ded5; }
+    .vision-targets { display: flex; gap: 12px; flex-shrink: 0; }
+    .target { width: 112px; height: 112px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .target strong { font-size: 25px; color: #f0d38b; line-height: 1.2; }
+    .target span { font-size: 11px; color: #dce9df; }
+    .contact { background: var(--cream); }
+    .contact-panel { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 42px; border-radius: 26px; background: white; box-shadow: var(--shadow); }
+    .contact-panel h2 { font-size: 30px; margin: 0 0 8px; }
+    .contact-panel p { color: var(--muted); margin: 0; }
+    footer { background: #102b26; color: #c4d2ca; padding: 35px 0; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .footer-brand { color: white; font-weight: 800; font-size: 15px; }
+    .footer-note { text-align: right; color: #8fa59a; }
+    @media (max-width: 850px) {
+      .navlinks { gap: 16px; }
+      .hero-inner { grid-template-columns: 1fr 0.8fr; gap: 10px; }
+      .hero-art { transform: scale(.86); }
+      .value-grid { grid-template-columns: repeat(2,1fr); }
+      .vision-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 32px, 520px); }
+      .nav { min-height: 72px; }
+      .menu-btn { display: block; }
+      .navlinks { display: none; position: absolute; left: 0; right: 0; top: 72px; background: white; padding: 18px 24px 24px; flex-direction: column; align-items: stretch; border-bottom: 1px solid var(--line); box-shadow: 0 15px 20px #183b3510; }
+      .navlinks.open { display: flex; }
+      .nav-cta { text-align: center; }
+      .hero-inner { display: flex; flex-direction: column; align-items: stretch; padding-top: 55px; padding-bottom: 35px; }
+      h1 { font-size: 42px; }
+      .hero-copy { font-size: 15px; }
+      .hero-art { min-height: 310px; transform: scale(.78); transform-origin: top center; margin-bottom: -60px; }
+      .stats-inner { grid-template-columns: 1fr; padding: 12px 0; }
+      .stat, .stat:first-child { padding: 13px 0; border-right: 0; border-bottom: 1px solid #ffffff22; }
+      .stat:last-child { border-bottom: 0; }
+      section { padding: 72px 0; }
+      .mission-grid, .strategy-grid { grid-template-columns: 1fr; }
+      .mission-card { padding: 28px; min-height: 245px; }
+      .value-grid { gap: 10px; }
+      .value-card { padding: 20px 17px; }
+      .value-icon { margin-bottom: 16px; }
+      .value-card h3 { font-size: 17px; }
+      .strategy-intro { align-items: flex-start; flex-direction: column; }
+      .strategy-card { padding: 25px; }
+      .vision-targets { width: 100%; }
+      .target { width: 100px; height: 100px; }
+      .contact-panel { padding: 28px; flex-direction: column; align-items: flex-start; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .footer-note { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="만안종합사회복지관 홈">
+        <span class="brand-mark">마</span>
+        <span>만안종합사회복지관<small>MANAN COMMUNITY WELFARE CENTER</small></span>
+      </a>
+      <button class="menu-btn" aria-label="메뉴 열기" aria-expanded="false" id="menuBtn">☰</button>
+      <nav class="navlinks" id="navLinks" aria-label="주요 메뉴">
+        <a href="#mission">미션·비전</a>
+        <a href="#values">핵심가치</a>
+        <a href="#strategy">중장기 전략</a>
+        <a class="nav-cta" href="#contact">함께하기 ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="eyebrow">Together, We Make a Village</div>
+          <h1>이웃과 함께<br>더불어 사는 <em>마을</em>을<br>만들어 갑니다.</h1>
+          <p class="hero-copy">존중으로 소통하고, 주민의 힘으로 연결하며, 누구나 일상에서 행복을 누리는 마을. 만안종합사회복지관이 이웃과 함께 그 변화를 만들어 갑니다.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#mission">우리의 방향 알아보기 <span>→</span></a>
+            <a class="btn btn-secondary" href="#strategy">지역과제 살펴보기</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="마을과 집을 표현한 일러스트">
+          <div class="art-circle"></div><div class="sun"></div>
+          <div class="hill"></div><div class="hill two"></div>
+          <div class="house"><div class="roof"></div><div class="window left"></div><div class="window right"></div><div class="door"></div></div>
+          <div class="floating-note note-one"><span>OUR MISSION</span>존중으로 소통하기</div>
+          <div class="floating-note note-two"><span>OUR VISION</span>주민의 삶을 연결하기</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="wrap stats-inner">
+        <div class="stat"><strong>관계에서 시작</strong><span>존중과 소통으로 만드는 변화</span></div>
+        <div class="stat"><strong>주민이 주인공</strong><span>주민의 참여와 주도성을 중심으로</span></div>
+        <div class="stat"><strong>함께 만드는 마을</strong><span>연대와 협력으로 지역문제 해결</span></div>
+      </div>
+    </div>
+
+    <section id="mission">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Who We Are</div>
+          <h2>우리가 함께 바라보는<br>마을의 내일</h2>
+          <p class="section-desc">작은 만남과 참여가 이웃을 연결하고, 연결된 이웃이 더 따뜻하고 지속가능한 마을을 만듭니다.</p>
+        </div>
+        <div class="mission-grid">
+          <article class="mission-card">
+            <div class="card-label">MISSION · 미션</div>
+            <h3>우리는 존중으로 소통하며<br>이웃과 함께 더불어 사는<br>마을을 만들어 갑니다.</h3>
+            <div class="mission-watermark">♡</div>
+          </article>
+          <article class="mission-card dark">
+            <div class="card-label">VISION · 비전</div>
+            <h3>지역과 정부의 참여를 촉진하여,<br>2031년까지 1만명 주민의 삶을 연결하고<br>5개 핵심 지역문제를 해결한다.</h3>
+            <p>주민과 지역의 자원을 잇고, 함께 실천하며 지속가능한 변화를 만듭니다.</p>
+            <div class="mission-watermark">◎</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="values" id="values">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Core Values</div>
+          <h2>우리의 실천을 이끄는<br>네 가지 핵심가치</h2>
+          <p class="section-desc">모든 활동의 중심에는 사람과 관계, 그리고 함께 살아가는 공동체가 있습니다.</p>
+        </div>
+        <div class="value-grid">
+          <article class="value-card"><div class="value-icon">🤝</div><h3>관계중심</h3><p>서로의 이야기를 듣고 신뢰를 쌓으며 연결의 힘을 키웁니다.</p></article>
+          <article class="value-card"><div class="value-icon">🌱</div><h3>주민중심</h3><p>주민의 목소리와 선택을 존중하고 주도적인 참여를 지원합니다.</p></article>
+          <article class="value-card"><div class="value-icon">🏡</div><h3>공동체지향</h3><p>이웃과 자원을 연결해 함께 돌보고 성장하는 마을을 만듭니다.</p></article>
+          <article class="value-card"><div class="value-icon">☀️</div><h3>행복추구</h3><p>누구나 일상에서 안전과 소속감, 행복을 누릴 수 있도록 합니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategy">
+      <div class="wrap">
+        <div class="strategy-intro">
+          <div class="section-head">
+            <div class="eyebrow">Strategic Direction</div>
+            <h2>중장기 전략방향<br>5대 지역과제</h2>
+            <p class="section-desc">지역의 가능성을 발견하고 주민과 함께 실천하는 일부터, 마을의 지속가능한 변화를 시작합니다.</p>
+          </div>
+          <span class="pill">주민 참여 · 지역 연대 · 지속가능성</span>
+        </div>
+        <div class="strategy-grid">
+          <article class="strategy-card featured">
+            <div class="strategy-number">LOCAL CHALLENGE 01</div>
+            <h3>생동하는 마을을 위한<br>생활문화 기반 조성</h3>
+            <p>일상의 경험과 지역의 공간을 연결해, 누구나 생활 속에서 문화를 누리고 나눌 수 있는 마을을 만듭니다.</p>
+            <ul>
+              <li>일상이 마을의 문화가 되는 나눔과 공유 실천</li>
+              <li>지역 인프라를 활용한 생활 속 문화 향유 기회 제공</li>
+              <li>세대가 공존하는 지역문화 활동 확대</li>
+            </ul>
+          </article>
+          <article class="strategy-card">
+            <div class="strategy-number">LOCAL CHALLENGE 02</div>
+            <h3>지속가능한<br>마을 돌봄 체계 구축</h3>
+            <p>소통과 관계를 바탕으로 지역 가까이에서 주민의 필요를 살피고, 함께 돌보는 연결망을 만들어 갑니다.</p>
+            <ul>
+              <li>소통과 관계 중심의 지역밀착형 복지실천</li>
+              <li>적극적 소통을 위한 다양한 참여구조 마련</li>
+              <li>당사자 주도의 주민 중심 사업 운영</li>
+              <li>주민연대를 통한 마을지향 복지 실천</li>
+            </ul>
+          </article>
+        </div>
+        <p style="margin:18px 0 0;color:#7b8982;font-size:12px;">※ 제공해 주신 자료에 포함된 지역과제 내용을 반영했습니다. 나머지 지역과제 내용은 추후 추가할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section class="vision-band">
+      <div class="wrap vision-inner">
+        <div>
+          <div class="eyebrow" style="color:#f0d38b;">Our Vision · 2031</div>
+          <h2>주민의 삶을 연결하고,<br>지역의 문제를 함께 해결합니다.</h2>
+          <p>참여를 촉진하고 협력의 범위를 넓혀 더불어 사는 마을의 미래를 만들어 갑니다.</p>
+        </div>
+        <div class="vision-targets">
+          <div class="target"><strong>10,000</strong><span>주민의 삶 연결</span></div>
+          <div class="target"><strong>5개</strong><span>핵심 지역문제 해결</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow">Join Us</div>
+            <h2>마을의 변화, 함께 시작해요.</h2>
+            <p>주민의 참여와 이웃의 연결이 더 따뜻한 마을을 만듭니다.</p>
+          </div>
+          <a class="btn btn-primary" href="#home">페이지 처음으로 ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><div class="footer-brand">만안종합사회복지관</div><div>존중으로 소통하며 이웃과 함께 더불어 사는 마을</div></div>
+      <div class="footer-note">본 페이지는 제공된 내용을 바탕으로 제작한 랜딩페이지 시안입니다.<br>연락처·주소·공식 홈페이지 링크는 확인 후 추가해 주세요.</div>
+    </div>
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+  </script>
+</body>
+</html>
